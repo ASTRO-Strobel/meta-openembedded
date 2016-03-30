@@ -45,7 +45,7 @@ apache_wait_start() {
 
     local i=0
     while : ; do
-            PIDTMP=$(pidof $DAEMON | tr ' ' '\n' | grep -w $(cat $PIDFILE))
+            [ -e $PIDFILE ] && PIDTMP=$(pidof $DAEMON | tr ' ' '\n' | grep -w $(cat $PIDFILE))
             if [ -n "${PIDTMP:-}" ] && kill -0 "${PIDTMP:-}" 2> /dev/null; then
                     return $STATUS
             fi
